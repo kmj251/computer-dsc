@@ -9,6 +9,15 @@ properties:
         MinVersion: '10.0.26100'
   configurationVersion: 0.2.0
   resources:
+    - resource: xPSDesiredStateConfiguration/WindowsOptionalFeature
+      id: "WindowsOptionalFeature"
+      directives:
+        description: Enable Virtual Machine Platform
+        allowPrerelease: true
+      settings:
+        Ensure: Present
+        Name: 
+          - VirtualMachinePlatform
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: "Code"
       directives:
