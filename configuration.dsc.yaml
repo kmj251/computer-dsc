@@ -27,4 +27,13 @@ properties:
         id: Microsoft.WindowsTerminal
         source: winget
         uselatest: true
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: "az-cli"
+      directives:
+        description: Install Azure CLI
+        allowPrerelease: true
+      settings:
+        id: Microsoft.AzureCLI
+        source: winget
+        uselatest: true
     
