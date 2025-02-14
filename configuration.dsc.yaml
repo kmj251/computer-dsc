@@ -81,3 +81,12 @@ properties:
         id: MuhammedKalkan.OpenLens
         source: winget
         uselatest: true
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: "Quicken"
+      directives:
+        description: Install Quicken
+        allowPrerelease: true
+      settings:
+        id: Quicken.Quicken
+        source: winget
+        uselatest: true
