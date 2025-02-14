@@ -63,3 +63,21 @@ properties:
         id: Kubernetes.kubectl
         source: winget
         uselatest: true
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: "logitech"
+      directives:
+        description: Install Logitech Options Plus
+        allowPrerelease: true
+      settings:
+        id: Logitech.OptionsPlus
+        source: winget
+        uselatest: true
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: "OpenLens"
+      directives:
+        description: Install OpenLens
+        allowPrerelease: true
+      settings:
+        id: MuhammedKalkan.OpenLens
+        source: winget
+        uselatest: true
