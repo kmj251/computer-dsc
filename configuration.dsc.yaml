@@ -9,15 +9,14 @@ properties:
         MinVersion: '10.0.26100'
   configurationVersion: 0.2.0
   resources:
-    - resource: xPSDesiredStateConfiguration/WindowsOptionalFeature
-      id: "WindowsOptionalFeature"
+    - resource: xPSDesiredStateConfiguration/xWindowsOptionalFeature 
+      id: "Microsoft-Windows-Subsystem-Linux"
       directives:
         description: Enable Virtual Machine Platform
         allowPrerelease: true
       settings:
         Ensure: Present
-        Name: 
-          - VirtualMachinePlatform
+        Name: Microsoft-Windows-Subsystem-Linux
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: "Code"
       directives:
