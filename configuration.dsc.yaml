@@ -10,13 +10,13 @@ properties:
   configurationVersion: 0.2.0
   resources:
     - resource: xPSDesiredStateConfiguration/xWindowsOptionalFeature 
-      id: "Microsoft-Windows-Subsystem-Linux"
+      id: VirtualMachinePlatform
       directives:
         description: Enable Virtual Machine Platform
         allowPrerelease: true
       settings:
         Ensure: Present
-        Name: Microsoft-Windows-Subsystem-Linux
+        Name: VirtualMachinePlatform
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: "Code"
       directives:
