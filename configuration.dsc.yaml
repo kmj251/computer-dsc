@@ -18,4 +18,13 @@ properties:
         id: Microsoft.VisualStudioCode
         source: winget
         uselatest: true
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: "terminal"
+      directives:
+        description: Install Windows Terminal
+        allowPrerelease: true
+      settings:
+        id: Microsoft.WindowsTerminal
+        source: winget
+        uselatest: true
     
