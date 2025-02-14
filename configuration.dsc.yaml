@@ -36,4 +36,30 @@ properties:
         id: Microsoft.AzureCLI
         source: winget
         uselatest: true
-    
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: "postman"
+      directives:
+        description: Install Postman
+        allowPrerelease: true
+      settings:
+        id: Postman.Postman 
+        source: winget
+        uselatest: true
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: "zoom"
+      directives:
+        description: Install Zoom
+        allowPrerelease: true
+      settings:
+        id: Zoom.Zoom.EXE
+        source: winget
+        uselatest: true
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: "kubectl"
+      directives:
+        description: Install kubectl
+        allowPrerelease: true
+      settings:
+        id: Kubernetes.kubectl
+        source: winget
+        uselatest: true
