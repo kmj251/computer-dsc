@@ -1,1 +1,19 @@
-admin_
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  assertions:
+    - resource: Microsoft.Windows.Developer/OsVersion
+      directives:
+        description: Verify min OS version requirement
+        allowPrerelease: true
+      settings:
+        MinVersion: '10.0.26100'
+  configurationVersion: 0.2.0
+  resources:
+    - resource: xPSDesiredStateConfiguration/xWindowsOptionalFeature 
+      id: VirtualMachinePlatform
+      directives:
+        description: Enable Virtual Machine Platform
+        allowPrerelease: true
+      settings:
+        Ensure: Present
+        Name: VirtualMachinePlatform
