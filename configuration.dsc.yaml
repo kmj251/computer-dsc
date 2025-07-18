@@ -10,6 +10,15 @@ properties:
   configurationVersion: 0.2.0
   resources:
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: "VLC"
+      directives:
+        description: Install VLC Media Player
+        allowPrerelease: true
+      settings:
+        id: VideoLAN.VLC
+        source: winget
+        uselatest: true
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: "Code"
       directives:
         description: Install Visual Studio Code
@@ -37,15 +46,6 @@ properties:
         source: winget
         uselatest: true
     - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: "postman"
-      directives:
-        description: Install Postman
-        allowPrerelease: true
-      settings:
-        id: Postman.Postman 
-        source: winget
-        uselatest: true
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: "zoom"
       directives:
         description: Install Zoom
@@ -61,15 +61,6 @@ properties:
         allowPrerelease: true
       settings:
         id: Kubernetes.kubectl
-        source: winget
-        uselatest: true
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: "logitech"
-      directives:
-        description: Install Logitech Options Plus
-        allowPrerelease: true
-      settings:
-        id: Logitech.OptionsPlus
         source: winget
         uselatest: true
     - resource: Microsoft.WinGet.DSC/WinGetPackage
