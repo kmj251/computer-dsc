@@ -24,6 +24,7 @@ properties:
       settings:
         Alignment: Middle # [KeepCurrentValue, Middle]
         HideLabelsMode: Always # [KeepCurrentValue, WhenFull, Always]
+        IconSize: Small # [KeepCurrentValue, Small]
         SearchBoxMode: ShowIconOnly # [KeepCurrentValue, ShowIconOnly, SearchBox, Hide]
         TaskViewButton: Show # [KeepCurrentValue, Hide]
         WidgetsButton: Hide # [KeepCurrentValue, Hide]
