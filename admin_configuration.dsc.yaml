@@ -13,7 +13,7 @@ properties:
       id: VirtualMachinePlatform
       directives:
         description: Enable Virtual Machine Platform
-        allowPrerelease: true
+        allowPrerelease: false
       settings:
         Ensure: Present
         Name: VirtualMachinePlatform
