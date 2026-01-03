@@ -6,7 +6,7 @@ properties:
         description: Verify min OS version requirement
         allowPrerelease: true
       settings:
-        MinVersion: '10.0.26100'
+        MinVersion: '10.0.26200'
   configurationVersion: 0.2.0
   resources:
     - resource: Microsoft.Windows.Developer/EnableDarkMode
@@ -28,12 +28,120 @@ properties:
         TaskViewButton: Show # [KeepCurrentValue, Hide]
         WidgetsButton: Hide # [KeepCurrentValue, Hide]
         RestartExplorer: True # Use caution when setting `RestartExplorer: true` as this will force explorer to close. Required for `HideLabelsMode`.
-    - resource: Microsoft.Windows.Developer/StartMenu
+    - resource: PSDscResources/Registry
+      id: StartMenuSettings
       directives:
-        description: Modify Start Menu settings
+        description: Show Settings folder in Start Menu
         allowPrerelease: true
       settings:
-        HideSettings: Show # [KeepCurrentValue, Show, Hide]
+        Key: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Start
+        ValueName: VisiblePlaces
+        ValueData: 3936e9e4d92c4d4c90a16e5c39972e0086087352aa5143429f7b2776584659d4bc248a140cd68942a0806ed9bba248822fb367e3de895543bfce61f37b18a9374ab0bd744af9684f8bd64398071da8bc
+        ValueType: Binary
+        Force: true
+        Ensure: Present
+    - resource: PSDscResources/Registry
+      id: TaskbarSmallIconsAlways
+      directives:
+        description: Show smaller Taskbar icons always
+        allowPrerelease: true
+      settings:
+        Key: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+        ValueName: IconSizePreference
+        ValueData: 0
+        ValueType: DWord
+        Force: true
+        Ensure: Present
+    - resource: PSDscResources/Registry
+      id: DesktopSmallIcons
+      directives:
+        description: Set small icons on desktop
+        allowPrerelease: true
+      settings:
+        Key: HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\Bags\1\Desktop
+        ValueName: IconSize
+        ValueData: 32
+        ValueType: DWord
+        Force: true
+        Ensure: Present
+    - resource: PSDscResources/Registry
+      id: DesktopAutoArrange
+      directives:
+        description: Enable auto arrange on desktop
+        allowPrerelease: true
+      settings:
+        Key: HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\Bags\1\Desktop
+        ValueName: FFlags
+        ValueData: 1075839525
+        ValueType: DWord
+        Force: true
+        Ensure: Present
+    - resource: PSDscResources/Registry
+      id: DesktopSortByName
+      directives:
+        description: Sort desktop icons by name
+        allowPrerelease: true
+      settings:
+        Key: HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\Bags\1\Desktop
+        ValueName: Sort
+        ValueData: "00000000"
+        ValueType: Binary
+        Force: true
+        Ensure: Present
+    - resource: PSDscResources/Registry
+      id: DesktopIconThisPC
+      directives:
+        description: Show This PC icon on desktop
+        allowPrerelease: true
+      settings:
+        Key: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel
+        ValueName: "{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
+        ValueData: 0
+        ValueType: DWord
+        Force: true
+        Ensure: Present
+    - resource: PSDscResources/Registry
+      id: DesktopIconUserFiles
+      directives:
+        description: Show User's Files icon on desktop
+        allowPrerelease: true
+      settings:
+        Key: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel
+        ValueName: "{59031a47-3f72-44a7-89c5-5595fe6b30ee}"
+        ValueData: 0
+        ValueType: DWord
+        Force: true
+        Ensure: Present
+    - resource: PSDscResources/Registry
+      id: DesktopIconNetwork
+      directives:
+        description: Show Network icon on desktop
+        allowPrerelease: true
+      settings:
+        Key: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel
+        ValueName: "{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}"
+        ValueData: 0
+        ValueType: DWord
+        Force: true
+        Ensure: Present
+    - resource: PSDscResources/Script
+      id: RestartExplorerForDesktop
+      dependsOn:
+        - DesktopSmallIcons
+        - DesktopAutoArrange
+        - DesktopSortByName
+      directives:
+        description: Restart Explorer to apply desktop changes
+        allowPrerelease: true
+      settings:
+        GetScript: |
+          return @{ Result = (Get-Process -Name explorer -ErrorAction SilentlyContinue) }
+        TestScript: |
+          return $false
+        SetScript: |
+          Stop-Process -Name explorer -Force
+          Start-Sleep -Seconds 2
+          Start-Process explorer
     - resource: Microsoft.Windows.Developer/WindowsExplorer
       directives:
         description: Modify Windows Explorer settings
