@@ -73,12 +73,21 @@ properties:
         id: MuhammedKalkan.OpenLens
         source: winget
         uselatest: true
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: "wsl"
+    - resource: PSDscResources/Script
+      id: "hevc-video-extensions"
       directives:
-        description: Install WSL
+        description: Download and install HEVC Video Extensions
         allowPrerelease: true
       settings:
-        id: Microsoft.WSL
-        source: winget
-        uselatest: true
+        GetScript: |
+          return @{ Result = (@(Get-AppxPackage -Name Microsoft.HEVCVideoExtension*).Count -gt 0) }
+        TestScript: |
+          return (@(Get-AppxPackage -Name Microsoft.HEVCVideoExtension*).Count -gt 0)
+        SetScript: |
+          $url = "http://tlu.dl.delivery.mp.microsoft.com/filestreamingservice/files/26098ba9-6a2d-48ac-afed-7adef3693837?P1=1767625706&P2=404&P3=2&P4=iOXhhiXhp6WEU8QEnDYGcrNqUdUeLgaIkTpF%2bZ%2f%2fuTAzmLT3VWgjht0eXSLPSN4FmVsapL2kKuB9iUgPvz4sOQ%3d%3d"
+          $output = "$env:TEMP\HEVCVideoExtensions.appx"
+          Write-Host "Downloading HEVC Video Extensions..."
+          Invoke-WebRequest -Uri $url -OutFile $output -UseBasicParsing
+          Write-Host "Installing HEVC Video Extensions..."
+          Add-AppxPackage -Path $output
+          Remove-Item $output -Force
