@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  assertions:
+    - resource: Microsoft.Windows.Developer/OsVersion
+      directives:
+        description: Verify min OS version requirement
+        allowPrerelease: true
+      settings:
+        MinVersion: '10.0.26200'
+  configurationVersion: 0.2.0
+  resources:
+    - resource: Microsoft.Windows.Developer/Taskbar
+      directives:
+        description: Modify taskbar settings
+        allowPrerelease: true
+      settings:
+        Alignment: Middle # [KeepCurrentValue, Middle]
+        HideLabelsMode: Always # [KeepCurrentValue, WhenFull, Always]
+        SearchBoxMode: ShowIconOnly # [KeepCurrentValue, ShowIconOnly, SearchBox, Hide]
+        TaskViewButton: Show # [KeepCurrentValue, Hide]
+        WidgetsButton: Hide # [KeepCurrentValue, Hide]
+        RestartExplorer: True # Use caution when setting `RestartExplorer: true` as this will force explorer to close. Required for `HideLabelsMode`.
+    - resource: PSDscResources/Registry
+      id: TaskbarSmallIconsAlways
+      directives:
+        description: Show smaller Taskbar icons always
+        allowPrerelease: true
+      settings:
+        Key: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+        ValueName: IconSizePreference
+        ValueData: 0
+        ValueType: DWord
+        Force: true
+        Ensure: Present

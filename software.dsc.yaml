@@ -73,6 +73,16 @@ properties:
         id: MuhammedKalkan.OpenLens
         source: winget
         uselatest: true
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: "GoogleChrome"
+      directives:
+        description: Install Google Chrome
+        allowPrerelease: true
+      settings:
+        id: Google.Chrome
+        source: winget
+        uselatest: true
+        ensure: Present
     - resource: PSDscResources/Script
       id: "hevc-video-extensions"
       directives:

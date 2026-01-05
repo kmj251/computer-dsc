@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  assertions:
+    - resource: Microsoft.Windows.Developer/OsVersion
+      directives:
+        description: Verify min OS version requirement
+        allowPrerelease: true
+      settings:
+        MinVersion: '10.0.26200'
+  configurationVersion: 0.2.0
+  resources:
+    - resource: PSDscResources/Registry
+      id: StartMenuSettings
+      directives:
+        description: Show Settings folder in Start Menu
+        allowPrerelease: true
+      settings:
+        Key: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Start
+        ValueName: VisiblePlaces
+        ValueData: 3936e9e4d92c4d4c90a16e5c39972e0086087352aa5143429f7b2776584659d4bc248a140cd68942a0806ed9bba248822fb367e3de895543bfce61f37b18a9374ab0bd744af9684f8bd64398071da8bc
+        ValueType: Binary
+        Force: true
+        Ensure: Present
