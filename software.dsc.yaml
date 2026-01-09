@@ -101,3 +101,21 @@ properties:
           Write-Host "Installing HEVC Video Extensions..."
           Add-AppxPackage -Path $output
           Remove-Item $output -Force
+    - resource: PSDscResources/Script
+      id: "heic-image-extensions"
+      directives:
+        description: Download and install HEIF Image Extensions
+        allowPrerelease: true
+      settings:
+        GetScript: |
+          return @{ Result = (@(Get-AppxPackage -Name Microsoft.HEIFImageExtension*).Count -gt 0) }
+        TestScript: |
+          return (@(Get-AppxPackage -Name Microsoft.HEIFImageExtension*).Count -gt 0)
+        SetScript: |
+          $url = "http://tlu.dl.delivery.mp.microsoft.com/filestreamingservice/files/d8fb96a1-d877-4cbb-8e31-afa8b77b8e8a?P1=1767625931&P2=404&P3=2&P4=ZFOJJjjl%2fTaWDN3%2fQGkqt7z7L5w4W2XXAf8D7XMeV0vGCjh9mWRzehA2JV%2bflziBHhcQjt%2b28y4CwxGBdWDcAQ%3d%3d"
+          $output = "$env:TEMP\HEIFImageExtensions.appx"
+          Write-Host "Downloading HEIF Image Extensions..."
+          Invoke-WebRequest -Uri $url -OutFile $output -UseBasicParsing
+          Write-Host "Installing HEIF Image Extensions..."
+          Add-AppxPackage -Path $output
+          Remove-Item $output -Force
