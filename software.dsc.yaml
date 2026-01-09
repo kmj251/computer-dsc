@@ -94,28 +94,11 @@ properties:
         TestScript: |
           return (@(Get-AppxPackage -Name Microsoft.HEVCVideoExtension*).Count -gt 0)
         SetScript: |
-          $url = "http://tlu.dl.delivery.mp.microsoft.com/filestreamingservice/files/26098ba9-6a2d-48ac-afed-7adef3693837?P1=1767625706&P2=404&P3=2&P4=iOXhhiXhp6WEU8QEnDYGcrNqUdUeLgaIkTpF%2bZ%2f%2fuTAzmLT3VWgjht0eXSLPSN4FmVsapL2kKuB9iUgPvz4sOQ%3d%3d"
+          $url = "http://tlu.dl.delivery.mp.microsoft.com/filestreamingservice/files/31d731be-1d08-4327-b74f-cfcfcea43d6e?P1=1767978653&P2=404&P3=2&P4=I%2f2TRsU1ZXQY8NCoy4bNcev9EfbVjP3h9rdGtmSfMle8gg1j0mfok2BxF0XpUHXS%2fqn%2bZnfE45cCAMM4ka5QDw%3d%3d"
           $output = "$env:TEMP\HEVCVideoExtensions.appx"
           Write-Host "Downloading HEVC Video Extensions..."
           Invoke-WebRequest -Uri $url -OutFile $output -UseBasicParsing
           Write-Host "Installing HEVC Video Extensions..."
           Add-AppxPackage -Path $output
           Remove-Item $output -Force
-    - resource: PSDscResources/Script
-      id: "heic-image-extensions"
-      directives:
-        description: Download and install HEIF Image Extensions
-        allowPrerelease: true
-      settings:
-        GetScript: |
-          return @{ Result = (@(Get-AppxPackage -Name Microsoft.HEIFImageExtension*).Count -gt 0) }
-        TestScript: |
-          return (@(Get-AppxPackage -Name Microsoft.HEIFImageExtension*).Count -gt 0)
-        SetScript: |
-          $url = "http://tlu.dl.delivery.mp.microsoft.com/filestreamingservice/files/d8fb96a1-d877-4cbb-8e31-afa8b77b8e8a?P1=1767625931&P2=404&P3=2&P4=ZFOJJjjl%2fTaWDN3%2fQGkqt7z7L5w4W2XXAf8D7XMeV0vGCjh9mWRzehA2JV%2bflziBHhcQjt%2b28y4CwxGBdWDcAQ%3d%3d"
-          $output = "$env:TEMP\HEIFImageExtensions.appx"
-          Write-Host "Downloading HEIF Image Extensions..."
-          Invoke-WebRequest -Uri $url -OutFile $output -UseBasicParsing
-          Write-Host "Installing HEIF Image Extensions..."
-          Add-AppxPackage -Path $output
-          Remove-Item $output -Force
+
