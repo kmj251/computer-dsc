@@ -53,7 +53,7 @@ properties:
       settings:
         Key: HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics
         ValueName: IconSpacing
-        ValueData: "-1000"
+        ValueData: "-500"
         ValueType: String
         Force: true
         Ensure: Present
@@ -65,7 +65,7 @@ properties:
       settings:
         Key: HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics
         ValueName: IconVerticalSpacing
-        ValueData: "-1000"
+        ValueData: "-850"
         ValueType: String
         Force: true
         Ensure: Present
