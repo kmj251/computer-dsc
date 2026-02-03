@@ -17,7 +17,7 @@ properties:
       settings:
         Key: HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\Bags\1\Desktop
         ValueName: IconSize
-        ValueData: 16
+        ValueData: 24
         ValueType: DWord
         Force: true
         Ensure: Present
