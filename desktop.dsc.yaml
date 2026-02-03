@@ -53,7 +53,7 @@ properties:
       settings:
         Key: HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics
         ValueName: IconSpacing
-        ValueData: "-500"
+        ValueData: "-300"
         ValueType: String
         Force: true
         Ensure: Present
