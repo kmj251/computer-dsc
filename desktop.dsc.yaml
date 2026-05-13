@@ -29,7 +29,7 @@ properties:
       settings:
         Key: HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\Bags\1\Desktop
         ValueName: FFlags
-        ValueData: 1075839525
+        ValueData: 1075839521
         ValueType: DWord
         Force: true
         Ensure: Present
